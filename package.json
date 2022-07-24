@@ -1,0 +1,42 @@
+{
+  "name": "code-notebook",
+  "version": "1.0.0",
+  "description": "Code Notebook",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel app/client/index.html --no-autoinstall"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PabloRosales/code-notebook/issues"
+  },
+  "homepage": "https://github.com/PabloRosales/code-notebook#readme",
+  "dependencies": {
+    "@headlessui/react": "^1.6.6",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "use-immer": "^0.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.2",
+    "@types/lodash": "^4.14.182",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.30.4",
+    "@typescript-eslint/parser": "^5.30.4",
+    "autoprefixer": "^10.4.7",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "parcel": "^2.6.2",
+    "postcss": "^8.4.14",
+    "prettier": "^2.7.1",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.1.6",
+    "typescript": "^4.7.4"
+  }
+}
