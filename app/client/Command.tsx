@@ -65,21 +65,23 @@ const Command = ({ item, items, show, setShow, query, setQuery, runCommand }: Pr
                   className="w-full rounded-md border-0 bg-slate-900 px-4 py-2.5 text-slate-100 placeholder-slate-300 focus:ring-0 sm:text-sm"
                 />
                 {items.length > 0 && (
-                  <Combobox.Options static className="-mb-2 max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-slate-100">
-                    {items.map((item) => (
-                      <Combobox.Option
-                        key={item.id}
-                        value={item.id}
-                        className={({ active }) =>
-                          classNames(
-                            'cursor-pointer flex items-center select-none rounded-md px-4 py-2 mb-1',
-                            active && 'bg-slate-600 text-white',
-                          )
-                        }
-                      >
-                        <i className={`${item.icon} w-4 mr-3 text-center`} /> {item.name}
-                      </Combobox.Option>
-                    ))}
+                  <Combobox.Options className="-mb-2 max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-slate-100">
+                    {items
+                      .filter((item) => !query || item.id.includes(query))
+                      .map((item) => (
+                        <Combobox.Option
+                          key={item.id}
+                          value={item.id}
+                          className={({ active }) =>
+                            classNames(
+                              'cursor-pointer flex items-center select-none rounded-md px-4 py-2 mb-1',
+                              active && 'bg-slate-600 text-white',
+                            )
+                          }
+                        >
+                          <i className={`${item.icon} w-4 mr-3 text-center`} /> {item.name}
+                        </Combobox.Option>
+                      ))}
                   </Combobox.Options>
                 )}
               </Combobox>

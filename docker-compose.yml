@@ -1,0 +1,20 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./app:/home/node/app
+      - ./package.json:/home/node/package.json
+      - ./tailwind.config.js:/home/node/tailwind.config.js
+      - ./tsconfig.json:/home/node/tsconfig.json
+      - ./.prettierrc.js:/home/node/.prettierrc.js
+      - ./.postcssrc:/home/node/.postcssrc
+    command: npm run dev
+    ports:
+      - "8080:8080"
+      - "1234:1234"
+    environment:
+      DEBUG: node-server:*
+      NODE_ENV: development

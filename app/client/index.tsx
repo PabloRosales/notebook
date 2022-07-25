@@ -5,18 +5,21 @@ import { createRoot } from 'react-dom/client';
 import React, { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
 
 interface Doc {
+  id: string;
   title: string;
   children: IItem[];
 }
 
 const ACTIONS = [
-  { name: 'Set Icon', id: 'set-icon', icon: 'fa-solid fa-cake-slice' },
+  { name: 'Set icon', id: 'set-icon', icon: 'fa-solid fa-cake-slice' },
   { name: 'Screenshot', id: 'screenshot', icon: 'fa-solid fa-camera' },
-  { name: 'Show Image', id: 'show-image', icon: 'fa-solid fa-image' },
+  { name: 'Show image', id: 'show-image', icon: 'fa-solid fa-image' },
+  { name: 'Send to Email', id: 'send-email', icon: 'fa-solid fa-envelope' },
 ];
 
 const DOC: Doc = {
-  title: 'Notebook',
+  id: 'notes',
+  title: 'Notes',
   children: [
     {
       id: 0,
@@ -168,7 +171,7 @@ const App = () => {
 
   useEffect(() => {
     const handle = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.code === 'Enter') {
+      if (e.ctrlKey && e.key === 'Enter') {
         setQuery('');
         setShowCommand(true);
       } else if (e.code === 'Escape') {
@@ -190,7 +193,7 @@ const App = () => {
 
   const onKeyDown: KeyboardEventHandler<HTMLDivElement> = useCallback(
     (e) => {
-      if (e.key === 'Enter') {
+      if (!e.ctrlKey && e.key === 'Enter') {
         e.preventDefault();
         setDoc((draft) => {
           const result = addNewItem(doc.children, focused);
@@ -211,12 +214,10 @@ const App = () => {
 
   const onInput = useCallback(
     (s: string) => {
-      console.log('called');
       setDoc((draft) => {
         if (focused) {
           const item = draft.children.find((item) => item.id === focused.id);
           if (item) {
-            console.log(s);
             item.text = s;
           }
         }
@@ -238,8 +239,30 @@ const App = () => {
         }}
         items={ACTIONS}
       />
-      <div className="relative mx-auto flex max-w-5xl h-screen p-5 rounded overflow-y-auto">
-        <div className="w-full">
+      <div className="relative mx-auto flex max-w-6xl h-screen p-5 rounded overflow-y-auto">
+        <div className="w-2/12">
+          <div className="pr-8 h-full">
+            <div className="border-r border-slate-800 h-full select-none">
+              <div className="uppercase text-xs text-slate-400 font-medium pl-2">Documents List</div>
+              <div className="mt-3">
+                {[doc].map((_doc) => {
+                  return (
+                    <div
+                      className="text-slate-50 hover:bg-slate-800 truncate text-sm border-b border-slate-700 py-1 pl-2 cursor-pointer"
+                      key={_doc.id}
+                    >
+                      {_doc.title}
+                    </div>
+                  );
+                })}
+                <div className="text-right p-2">
+                  <i className="fa-solid fa-plus text-slate-600 hover:text-lime-600 cursor-pointer" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="w-10/12">
           <div className="text-xl dark:text-white mb-5">{DOC.title}</div>
           {createTree(doc.children).map((item) => {
             return (
