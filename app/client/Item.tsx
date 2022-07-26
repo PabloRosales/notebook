@@ -1,16 +1,5 @@
 import React, { Fragment, KeyboardEventHandler } from 'react';
-
-type ItemType = 'h1' | 'note' | 'image';
-
-export interface IItem {
-  id: number;
-  text: string;
-  icon?: string;
-  href?: string;
-  parent?: number;
-  type?: ItemType;
-  children?: IItem[];
-}
+import { IItem } from './types';
 
 interface ItemRenderProps {
   id: string;
