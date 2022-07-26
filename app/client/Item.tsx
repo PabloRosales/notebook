@@ -103,10 +103,10 @@ const Item = ({ id, item, level, onChange, onFocused, setFocused, onKeyDown }: I
       <div className="flex flex-wrap items-center rounded focus-within:dark:bg-neutral-800">
         <div
           className={`flex px-2 items-center cursor-pointer ${
-            item.children ? 'text-sky-500 hover:text-sky-300' : 'text-slate-500 hover:text-slate-200'
+            item.children && item.children.length > 0 ? 'text-sky-500 hover:text-sky-300' : 'text-slate-500 hover:text-slate-200'
           }`}
         >
-          <i className={`${item.icon ? item.icon : 'fa-solid fa-circle-small'}`} />
+          <i className={`${item.icon ? item.icon : 'ri-checkbox-blank-circle-fill ri-xs'}`} />
         </div>
         {item.type === undefined && <ItemBase onChange={onChange} onKeyDown={onKeyDown} id={id} onFocused={onFocused} text={item.text} />}
         {item.type === 'h1' && <ItemH1 onChange={onChange} onKeyDown={onKeyDown} id={id} onFocused={onFocused} text={item.text} />}

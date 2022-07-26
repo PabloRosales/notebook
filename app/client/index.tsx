@@ -11,10 +11,10 @@ interface Doc {
 }
 
 const ACTIONS = [
-  { name: 'Set icon', id: 'set-icon', icon: 'fa-solid fa-cake-slice' },
-  { name: 'Screenshot', id: 'screenshot', icon: 'fa-solid fa-camera' },
-  { name: 'Show image', id: 'show-image', icon: 'fa-solid fa-image' },
-  { name: 'Send to Email', id: 'send-email', icon: 'fa-solid fa-envelope' },
+  { name: 'Set icon', id: 'set-icon', icon: 'ri-cake-line' },
+  { name: 'Screenshot', id: 'screenshot', icon: 'ri-camera-fill' },
+  { name: 'Show image', id: 'show-image', icon: 'ri-image-line' },
+  { name: 'Send to Email', id: 'send-email', icon: 'ri-mail-line' },
 ];
 
 const DOC: Doc = {
@@ -25,7 +25,7 @@ const DOC: Doc = {
       id: 0,
       type: 'h1',
       text: 'ToDo',
-      icon: 'fa-solid fa-book',
+      icon: 'ri-book-2-line ri-lg',
     },
     {
       id: 1,
@@ -72,7 +72,7 @@ const DOC: Doc = {
       id: 9,
       parent: 8,
       type: 'image',
-      icon: 'fa-solid fa-image',
+      icon: 'ri-image-line ri-lg',
       text: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/1dayoldkitten.JPG',
     },
     {
@@ -256,7 +256,7 @@ const App = () => {
                   );
                 })}
                 <div className="text-right p-2">
-                  <i className="fa-solid fa-plus text-slate-600 hover:text-lime-600 cursor-pointer" />
+                  <i className="ri-plus-line text-slate-600 hover:text-lime-600 cursor-pointer" />
                 </div>
               </div>
             </div>

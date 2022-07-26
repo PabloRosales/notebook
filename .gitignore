@@ -108,5 +108,3 @@ dist
 .idea
 *.iml
 .vscode
-dist
-app/client/assets/fontawesome

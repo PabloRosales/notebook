@@ -4,9 +4,10 @@ A personal toy project for a custom note-taking app.
 Hacked together in a few hours and unfinished.
 Not ready for use, just hacking a proof-of-concept.
 
-## Requirements
+## Run demo
 
-FontAwesome 6 needs to be added at `app/client/assets/fontawesome` for icons to work.
+* run `docker compose up -d`
+* open http://localhost:1234
 
 ## Screenshots
 
