@@ -1,4 +1,5 @@
 import { Doc, IItem } from './types';
+import { last } from 'lodash';
 
 export const createSubTree = (items: IItem[], parentId: number): IItem[] => {
   const newChildren: IItem[] = [];
@@ -83,6 +84,48 @@ export const indent = (items: IItem[], item?: IItem): IItem[] => {
   }
 
   const itemsCopy = [...items];
+  const current = itemsCopy.find((_item) => _item.id === item.id);
+  const prev = itemsCopy.find((_item) => _item.id === item.id - 1);
+
+  if (current && prev && current.parent !== prev.id) {
+    if (prev.parent !== undefined && prev.parent !== current.parent) {
+      console.log('parent of prev');
+      current.parent = prev.parent;
+    } else {
+      console.log('parent as prev');
+      current.parent = prev.id;
+    }
+  }
+
+  return itemsCopy;
+};
+
+export const dedent = (items: IItem[], item?: IItem): IItem[] => {
+  if (!item) {
+    return items;
+  }
+
+  const itemsCopy = [...items];
+  const current = itemsCopy.find((_item) => _item.id === item.id);
+  if (current) {
+    if (current.parent !== undefined) {
+      const parent = itemsCopy.find((_item) => _item.id === current.parent);
+      if (parent) {
+        current.parent = parent.parent;
+        if (parent.children && parent.children.length > 1) {
+          const lastChildId = parent.children[parent.children.length - 1].id;
+          if (lastChildId !== current.id) {
+            current.id = lastChildId + 1;
+            for (const child of parent.children) {
+              if (child.id <= current.id) {
+                child.id++;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
   return itemsCopy;
 };

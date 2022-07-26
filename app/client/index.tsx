@@ -4,7 +4,10 @@ import { useImmer } from 'use-immer';
 import { createRoot } from 'react-dom/client';
 import React, { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
 import { Doc, IItem } from './types';
-import { addNewItem, createTree, getStoredDoc, indent, moveUpOrDown, storeDoc } from './helpers';
+import { addNewItem, createTree, dedent, getStoredDoc, indent, moveUpOrDown, storeDoc } from './helpers';
+
+// TODO: Remove this
+const DEBUG = false;
 
 const ACTIONS = [
   { name: 'Set icon', id: 'set-icon', icon: 'ri-cake-line' },
@@ -31,9 +34,18 @@ const App = () => {
         moveUpOrDown(doc.children, focused, 'up');
       } else if (e.code === 'ArrowDown') {
         moveUpOrDown(doc.children, focused, 'down');
+      } else if (e.shiftKey && e.key === 'Tab') {
+        e.preventDefault();
+        setDoc((draft) => {
+          dedent(draft.children, focused);
+          storeDoc(draft);
+        });
       } else if (e.code === 'Tab') {
         e.preventDefault();
-        indent(doc.children, focused);
+        setDoc((draft) => {
+          indent(draft.children, focused);
+          storeDoc(draft);
+        });
       }
     };
 
@@ -79,6 +91,10 @@ const App = () => {
     },
     [focused, setDoc],
   );
+
+  if (DEBUG) {
+    console.log(doc.children);
+  }
 
   return (
     <div>
