@@ -1,6 +1,8 @@
 # Notebook
 
-__Note__: This project is not usable in its current state (except for me to take some notes).
+**Check out [Obsidian](https://obsidian.md/)!**
+
+~__Note__: This project is not usable in its current state (except for me to take some notes).~
 
 A personal toy project for a custom note-taking app.
 Hacked together in a few hours and unfinished.
